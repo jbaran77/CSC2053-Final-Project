@@ -1,0 +1,27 @@
+<h1>Eastern Confrence</h1>
+
+<button><a href = "Sixers.html">Sixers</a></button>
+<button><a href = "page1.html">page 1</a></button>
+<button><a href = "page2.html">page 2</a></button>
+
+<ul>
+
+</ul>
+
+
+<script>
+    fetch('https://www.balldontlie.io/api/v1/teams')//input specific link for data
+        .then(res  => {
+            return res.json();
+        })
+       .then(data => {
+         data.data.forEach(element => { //accesses data array which contains the teams
+            if(element.confrence == "East"){ //returns teams in Eastern Confrence
+            const markup = `<li>${element.full_name}</li>`;        // these two lines put the data in the unordered list above
+            document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+         }
+         });
+        console.log(data.data)
+       });
+        
+</script>
