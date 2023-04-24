@@ -1,5 +1,8 @@
 <h1>home page</h1>
 
+<button><a href = "Sixers.html">Sixers</a></button>
+<button><a href = "page1.html">page 1</a></button>
+<button><a href = "page2.html">page 2</a></button>
 
 <ul>
 
@@ -7,14 +10,14 @@
 
 
 <script>
-    fetch('https://www.balldontlie.io/api/v1/players')
+    fetch('https://www.balldontlie.io/api/v1/players')//input specific link for data
         .then(res  => {
             return res.json();
         })
        .then(data => {
-         data.data.forEach(element => {
-            if(element.position == "C"){
-            const markup = `<li>${element.first_name,element.last_name}</li>`;
+         data.data.forEach(element => { //accesses data array which contains the players
+            if(element.position == "C"){ //returns players whos position is Center
+            const markup = `<li>${element.first_name,element.last_name}</li>`;        // these two lines put the data in the unordered list above
             document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
          }
          });
