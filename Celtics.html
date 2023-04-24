@@ -8,22 +8,3 @@
     <ul id = "boston"> </ul>
 </ul>
 
-
-<script>
-    fetch('https://www.balldontlie.io/api/v1/teams')//input specific link for data
-        .then(res  => {
-            return res.json();
-        })
-        .then(info => {
-         var city = info.data[22].city;
-         console.log(city)
-         var b_node = document.getElementById("boston");     //displays "Boston"
-         console.log(b_node);
-         b_node.textContent = city;
-
-        console.log(info.data[22])
-       });
-
-    
-        
-</script>
