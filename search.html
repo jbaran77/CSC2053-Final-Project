@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>Search Player By City</title>
+        <link type="text/css" rel="stylesheet" href="search.css" >
+    </head>
+
+
+
+
+
+
+    <nav>
+        <ul id = nav>
+            <li id = navi><a href = "index.html">Home</a></li>
+            <li id = navi><a href = "search.html">Search</a></li>
+            <li id = navi><a href = "page1.html">1</a></li>
+            <li id = navi><a href = "page2.html">2</a></li>
+            
+        </ul>
+    </nav>
+
+
+<body>
+
+<label>Enter Player Name</label><br>
+<input type = "text" id = "myText"><br>
+<button type = "button" id = "myButton">submit</button>
+
+<ol>
+    
+</ol>
+
+
+
+
+</body>
+
+
+</html>
+<script>
+
+    document.getElementById("myButton").onclick = function(){
+        var page = 0;
+        while(page<10){
+            var city = document.getElementById("myText").value;
+            fetch("https://www.balldontlie.io/api/v1/players/?page="+page)//input specific link for data, iterating page
+            .then(res  => {
+             return res.json();
+         })
+            .then(info => {
+            
+              info.data.forEach(element => { //accesses data array which contains the players
+              if(element.team.abbreviation == city){ //returns players whos team matches entry
+              const markup = `<li>${element.first_name,element.last_name}</li>`;  // these two lines put the data in the unordered list above
+              document.querySelector('ol').insertAdjacentHTML('beforeend', markup);
+            }
+            });
+        
+             console.log(info.data)
+            console.log(info.meta.next_page)
+        });
+        page = page +1;
+        console.log(page)
+        
+        }
+
+            
+    }
+    
+    
+
+    
+
+    
+        
+</script>
