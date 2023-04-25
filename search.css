@@ -9,6 +9,14 @@
   #navi {
     float: left;
   }
+
+  #list{
+    text-align: center;
+  }
+
+  #players{
+    list-style-type: none;
+  }
   
   li a {
     display: block;
@@ -22,3 +30,5 @@
   li a:hover {
     background-color: #111;
   }
+
+

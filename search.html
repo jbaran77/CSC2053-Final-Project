@@ -22,15 +22,16 @@
 
 <body>
 
-<label>Enter Player Name</label><br>
+<div id = "list">
+<label>Enter City Abbreviation (Ex: GSW, PHI, etc.)</label><br>
 <input type = "text" id = "myText"><br>
 <button type = "button" id = "myButton">submit</button>
 
-<ol>
+<ul id = "players">
     
-</ol>
+</ul>
 
-
+</div>
 
 
 </body>
@@ -40,19 +41,27 @@
 <script>
 
     document.getElementById("myButton").onclick = function(){
-        var page = 0;
-        while(page<10){
-            var city = document.getElementById("myText").value;
+        var page = 1;
+        var city = document.getElementById("myText").value; // get city from submission
+          
+
+        var ul = document.getElementById("players");  //clear previous list
+        ul.innerHTML = "";
+
+     
+        while(page<20){ // amount of pages
+            
             fetch("https://www.balldontlie.io/api/v1/players/?page="+page)//input specific link for data, iterating page
             .then(res  => {
              return res.json();
          })
             .then(info => {
-            
+              
+
               info.data.forEach(element => { //accesses data array which contains the players
               if(element.team.abbreviation == city){ //returns players whos team matches entry
-              const markup = `<li>${element.first_name,element.last_name}</li>`;  // these two lines put the data in the unordered list above
-              document.querySelector('ol').insertAdjacentHTML('beforeend', markup);
+              const markup = `<li>${element.first_name + " " + element.last_name}</li>`;  // these two lines put the data in the unordered list above
+              document.querySelector('#players').insertAdjacentHTML('beforeend', markup);
             }
             });
         
