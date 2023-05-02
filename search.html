@@ -12,7 +12,7 @@
     <nav>
         <ul id = nav>
             <li id = navi><a href = "index.html">Home</a></li>
-            <li id = navi><a href = "search.html">Search</a></li>
+            <li id = navi><a href = "search.html">Search Date</a></li>
             <li id = navi><a href = "page1.html">1</a></li>
             <li id = navi><a href = "weights.html">Player Weights</a></li>
             
@@ -23,14 +23,15 @@
 <body>
 
 <div id = "list">
-<label>Enter City Abbreviation (Ex: GSW, PHI, etc.)</label><br>
+<label>Enter A Date In This Format : YYYY-M-D</label><br>
 <input type = "text" id = "myText"><br>
 <button type = "button" id = "myButton">submit</button>
 
-<ul id = "players">
-    
-</ul>
 
+</div>
+
+<div id = "tables">
+    
 </div>
 
 
@@ -41,45 +42,57 @@
 <script>
 
     document.getElementById("myButton").onclick = function(){
-        var page = 1;
-        var city = document.getElementById("myText").value; // get city from submission
+        
+        
+
+        var date = document.getElementById("myText").value; // get date from submission
           
 
-        var ul = document.getElementById("players");  //clear previous list
+        var ul = document.getElementById("tables");  //clear previous list
         ul.innerHTML = "";
+        
 
-     
-        while(page<20){ // amount of pages
-            
-            fetch("https://www.balldontlie.io/api/v1/players/?page="+page)//input specific link for data, iterating page
-            .then(res  => {
-             return res.json();
-         })
+
+          
+            fetch("https://www.balldontlie.io/api/v1/games?dates[]="+date+"T00:00:00.000Z")//input specific link for data, iterating page
+            .then(res  => res.json())
             .then(info => {
-              
+            console.log(info.data.length)
+            const parent = document.getElementById('tables');
+            
+            for(let i = 0; i < info.data.length;i++){
+                console.log(i)
+                const tableHtml = `
+                  <table id = games>
+                        <th>Home Team </th>
+                        <th>Away Team </th>
+                            <tr> 
+                                <td>${info.data[i].home_team.full_name} </td>
+                                <td>${info.data[i].visitor_team.full_name}
+                            </tr>
 
-              info.data.forEach(element => { //accesses data array which contains the players
-              if(element.team.abbreviation == city){ //returns players whos team matches entry
-              const markup = `<li>${element.first_name + " " + element.last_name}</li>`;  // these two lines put the data in the unordered list above
-              document.querySelector('#players').insertAdjacentHTML('beforeend', markup);
+                            <tr>
+                                <td>${info.data[i].home_team_score} </td>
+                                <td>${info.data[i].visitor_team_score}</td>
+                    </table>
+                `;
+                parent.insertAdjacentHTML('beforeend', tableHtml);
             }
-            });
-        
-             console.log(info.data)
-            console.log(info.meta.next_page)
-        });
-        page = page +1;
-        console.log(page)
-        
-        }
 
             
-    }
-    
-    
 
-    
 
+        
+
+            
+
+              
+            } 
+            );
+        
     
+        
+        };
+       
         
 </script>

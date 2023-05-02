@@ -23,6 +23,16 @@
   #players{
     list-style-type: none;
   }
+
+  #games{
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+
+
+
+  
   
   li a {
     display: block;
@@ -36,5 +46,20 @@
   li a:hover {
     background-color: #111;
   }
+
+  table {
+    border-style: solid;
+    margin: 5%;
+    margin-bottom: 5%;
+}
+
+caption {
+    font-size: 2em;
+}
+    
+td, th {
+    padding: .5em;
+    padding-right:5em;
+}
 
 

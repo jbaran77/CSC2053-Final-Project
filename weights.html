@@ -49,7 +49,7 @@
                       
         
                       info.data.forEach(element => { //accesses data array which contains the players
-                      if(element.data.weight_pounds == weight){ //returns search if weight has nba players listed at that weight
+                      if(element.weight_pounds == weight){ //returns search if weight has nba players listed at that weight
                       const markup = `<li>${element.first_name + " " + element.last_name}<li>`;  // these two lines put the data above into a list
                       document.querySelector('#players').insertAdjacentHTML('beforeend', markup);
                     }
@@ -60,6 +60,7 @@
                 });
                 page = page +1;
                 console.log(page)
+                
 
                 }       
             }
