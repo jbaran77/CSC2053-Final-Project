@@ -1,0 +1,90 @@
+<html>
+<head>
+    <title>Find Players by Last Name</title>
+    <link type="text/css" rel="stylesheet" href="search.css" >
+</head>
+
+<nav>
+    <ul id = nav>
+        <li id = navi><a href = "index.html">Home</a></li>
+        <li id = navi><a href = "search.html">Search Date</a></li>
+        <li id = navi><a href = "page1.html">NBA Conferences</a></li>
+        <li id = navi><a href = "players.html">Player Search</a></li>
+        
+    </ul>
+</nav>
+
+    
+    
+    <body>
+
+        <div id = "list">
+        <label>Enter Player Last Name (Ex:Durant) </label><br>
+        <input type = "text" id = "myText" ><br>
+        <button type = "button" id = "myButton">submit</button>
+        
+        </div>
+        </div>
+
+        <div id = "tables">
+            
+        </div>
+        </body>
+        </html>
+        <script>
+      document.getElementById("myButton").onclick = function(){
+        var page = 1;
+        var name = document.getElementById("myText").value; // get city from submission
+          
+
+        var ul = document.getElementById("tables");  //clear previous list
+        ul.innerHTML = "";
+
+     
+        while(page<60 ){ // amount of pages
+            
+            fetch("https://www.balldontlie.io/api/v1/players/?per_page=100&page="+page)//input specific link for data, iterating page, 100 players per page
+            .then(res  => {
+             return res.json();
+         })
+            .then(info => {
+              
+
+              info.data.forEach(element => { //accesses data array which contains the players
+              if(element.last_name == name){ //returns players whos last name matches entry
+              const markup = `
+                <table id = players>
+                    <th> First Name </th>
+                    <th> Last Name </th>
+                    <th> Position </th>
+                    <th> Team </th>
+                        <tr>
+                            <td>${element.first_name}</td>
+                            <td>${element.last_name}</td>
+                            <td>${element.position}</td>
+                            <td>${element.team.full_name}</td>
+                        </tr>
+                </table>
+                    `
+
+    
+              ;  // these two lines put the data in the table above
+              
+              document.querySelector('#tables').insertAdjacentHTML('beforeend', markup);
+              
+            }
+            });
+          
+             console.log(info.data)
+            console.log(info.meta.next_page)
+        });
+        page = page +1;
+        console.log(page)
+        
+        }
+
+            
+    }
+        
+
+        </script>
