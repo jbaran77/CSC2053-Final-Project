@@ -1,27 +1,82 @@
-<h1>Eastern Conference</h1>
+<head>
+  <title>NBA Conference</title>
+  <link type="text/css" rel="stylesheet" href="search.css" >
+</head>
+ 
+ <nav>
+        <ul id = nav>
+            <li id = navi><a href = "index.html">Home</a></li>
+            <li id = navi><a href = "search.html">Search Date</a></li>
+            <li id = navi><a href = "page1.html">NBA Conferences</a></li>
+            <li id = navi><a href = "position.html">Players by Position</a></li>
+            
+        </ul>
+    </nav>
 
-<button><a href = "Sixers.html">Sixers</a></button>
-<button><a href = "page1.html">page 1</a></button>
-<button><a href = "page2.html">page 2</a></button>
 
-<ul>
 
-</ul>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<h2>Select a Conference Below</h2>
+
+<button onclick="retrive('East')">East</button>
+<button onclick="retrive('West')">West</button>
+
+
+
+<ul id = "teams"></ul>
 
 
 <script>
+
+
+function retrive(Conf){ ////reads in teams fro API
+  
+  console.log(Conf)
+  var ul = document.getElementById("teams");  //clear previous list
+        ul.innerHTML = "";
+ // if (conference == Conf){
     fetch('https://www.balldontlie.io/api/v1/teams')//input specific link for data
-        .then(res  => {
-            return res.json();
-        })
-       .then(data => {
-         data.data.forEach(element => { //accesses data array which contains the teams
-            if(element.confrence == "East"){ //returns teams in Eastern Confrence
-            const markup = `<li>${element.full_name}</li>`;        // these two lines put the data in the unordered list above
-            document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
-         }
-         });
-        console.log(data.data)
+    .then(res  => res.json())
+    .then(data => {
+     
+       data.data.forEach(element => { //accesses data array which contains the teams
+          if(element.conference == Conf){ //returns teams in Eastern Confrence
+          const markup = `<li>${element.full_name}</li>`;        // these two lines put the data in the unordered list above
+          document.querySelector('#teams').insertAdjacentHTML('beforeend', markup);
+       }
        });
-        
+      console.log(data.data)
+     });
+  //}
+/*
+  else if (conference == "Western Conference"){
+    fetch('https://www.balldontlie.io/api/v1/teams')//input specific link for data
+      .then(res  => {
+          return res.json();
+      })
+     .then(data => {
+       data.data.forEach(element => { //accesses data array which contains the teams
+          if(element.confrence == "West"){ //returns teams in Eastern Confrence
+          const markup = `<li>${element.full_name}</li>`;        // these two lines put the data in the unordered list above
+          document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+       }
+       });
+      console.log(data.data)
+     });
+  }
+*/
+}
 </script>
+
+</body>
+</html>
