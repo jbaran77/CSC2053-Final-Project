@@ -12,8 +12,8 @@
     <nav>
         <ul id = nav>
             <li id = navi><a href = "index.html">Home</a></li>
-            <li id = navi><a href = "search.html">Search Date</a></li>
-            <li id = navi><a href = "page1.html">1</a></li>
+            <li id = navi><a href = "search.html">Search Date/Games</a></li>
+            <li id = navi><a href = "conference.html">Teams By Conference</a></li>
             <li id = navi><a href = "position.html">Players by Position</a></li>
             
         </ul>
@@ -60,10 +60,10 @@
             console.log(info.data.length)
             const parent = document.getElementById('tables');
             
-            for(let i = 0; i < info.data.length;i++){
+            for(let i = 0; i < info.data.length;i++){ //create tables with game data
                 console.log(i)
                 const tableHtml = `
-                  <table id = games>
+                  <table id = games>  
                         <th>Home Team </th>
                         <th>Away Team </th>
                             <tr> 
@@ -76,7 +76,7 @@
                                 <td>${info.data[i].visitor_team_score}</td>
                     </table>
                 `;
-                parent.insertAdjacentHTML('beforeend', tableHtml);
+                parent.insertAdjacentHTML('beforeend', tableHtml); //insert a new table
             }
 
             

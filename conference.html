@@ -5,10 +5,10 @@
  
  <nav>
         <ul id = nav>
-            <li id = navi><a href = "index.html">Home</a></li>
-            <li id = navi><a href = "search.html">Search Date</a></li>
-            <li id = navi><a href = "page1.html">NBA Conferences</a></li>
-            <li id = navi><a href = "position.html">Players by Position</a></li>
+          <li id = navi><a href = "index.html">Home</a></li>
+          <li id = navi><a href = "search.html">Search Date/Games</a></li>
+          <li id = navi><a href = "conference.html">Teams By Conference</a></li>
+          <li id = navi><a href = "position.html">Players by Position</a></li>
             
         </ul>
     </nav>
@@ -26,16 +26,19 @@
 </head>
 <body>
 
+<div id = "conf_list">
 <h2>Select a Conference Below</h2>
 
+
+<div id = "buttons">
 <button onclick="retrive('East')">East</button>
 <button onclick="retrive('West')">West</button>
-
+</div>
 
 
 <ul id = "teams"></ul>
 
-
+</div>
 <script>
 
 
@@ -44,7 +47,7 @@ function retrive(Conf){ ////reads in teams fro API
   console.log(Conf)
   var ul = document.getElementById("teams");  //clear previous list
         ul.innerHTML = "";
- // if (conference == Conf){
+
     fetch('https://www.balldontlie.io/api/v1/teams')//input specific link for data
     .then(res  => res.json())
     .then(data => {
@@ -57,24 +60,8 @@ function retrive(Conf){ ////reads in teams fro API
        });
       console.log(data.data)
      });
-  //}
-/*
-  else if (conference == "Western Conference"){
-    fetch('https://www.balldontlie.io/api/v1/teams')//input specific link for data
-      .then(res  => {
-          return res.json();
-      })
-     .then(data => {
-       data.data.forEach(element => { //accesses data array which contains the teams
-          if(element.confrence == "West"){ //returns teams in Eastern Confrence
-          const markup = `<li>${element.full_name}</li>`;        // these two lines put the data in the unordered list above
-          document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
-       }
-       });
-      console.log(data.data)
-     });
-  }
-*/
+      
+
 }
 </script>
 
