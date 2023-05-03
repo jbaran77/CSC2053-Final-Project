@@ -12,7 +12,7 @@
   #h1{
     text-align: center;
   }
-  #h2{
+  h2{
     text-align: center;
   }
 
@@ -60,6 +60,17 @@ caption {
 td, th {
     padding: .5em;
     padding-right:5em;
+}
+
+#teams{
+  text-align: center;
+  list-style-type: none;
+}
+
+#buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
